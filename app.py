@@ -82,3 +82,4 @@ def edit():
         cursor.execute(f"delete from services where service = '{oldservice}'")
     con.commit()
     return redirect("/")
+
