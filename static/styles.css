@@ -1,0 +1,143 @@
+/* * {
+    border: white 2px solid;
+} */
+
+body {
+    background-color: #4C5454;
+}
+
+input {
+    background-color: #ffffff;
+    border: #4C5454 2px solid;
+    width: 80%;
+    padding: 10px;
+    font-size: 20px;
+    color: #1EA896;
+    font-weight: bold;
+}
+
+input:focus {
+    outline: none !important;
+    border: #1EA896 2px solid !important;
+    box-shadow: 0 0 10px #719ECE;
+
+}
+
+
+#service {
+    cursor: pointer;
+}
+
+.total {
+    float: right;
+    margin-right: 1%;
+}
+span {
+    color: #1EA896;
+}
+
+a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.container {
+    margin: 2%;
+}
+
+.month-add {
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+}
+
+.month-add h1 {
+    font-size: 50px;
+    
+}
+
+
+.month-add div button {
+    margin-top: 145% !important;
+    padding: 10px;
+    background-color: #1EA896;
+    border: #1EA896 2px solid;
+    color: white;
+    cursor: pointer;
+}
+
+
+.container h1 {
+    color: #FF715B;
+
+}
+
+.container table {
+    width: 100%;
+    color: white;
+    font-size: 25px;
+    border-collapse: collapse;
+}
+
+
+.container table th {
+    background-color: #FF715B;
+    padding: 14px;
+}
+
+table tr td {
+    background-color: #1EA896;
+    padding: 15px;
+}
+
+table th, td {
+    border: #4C5454 2px solid;
+}
+
+.container table th:first-child{
+    width: 40%;
+}
+
+.add-service-model {
+    position: fixed;
+    display: none;
+    background-color: #0059bf;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    overflow: auto;
+}
+
+.add-service-contents {
+        background-color: #ffffff;
+        position: relative;
+        top: 150px;
+        width: 80%;
+        left: 10vw;
+        padding: 10px 10px 40px 10px;
+        border-radius: 10px;
+        display: block !important;
+}
+
+.add-service-contents div {
+    text-align: center;
+    margin: 3%;
+}
+
+.add-service-contents h1 {
+    font-size: 35px;
+    color: #FF715B;
+}
+
+
+.submitbtn {
+    background-color: #1EA896;
+    font-size: 20px;
+    color: #ffffff;
+    border: #ffffff;
+    padding: 12px;
+    font-weight: bold;
+}
