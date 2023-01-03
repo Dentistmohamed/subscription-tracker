@@ -34,19 +34,12 @@ def main():
 
 @app.route("/add", methods=["POST"])
 def add():
-    con = sqlite3.connect("database.db")
-    cursor = con.cursor()
-    today = date.today()
     service = request.form.get("service")
-    service = service.replace("'", "''")
     amount = request.form.get("amount")
     link = request.form.get("link")
-    link = link.replace("'", "''")
-    date1 = request.form.get("date")
-    if not date1:
-        date1 = today
-    cursor.execute(f"INSERT OR IGNORE INTO services (service, amount, link, date) values ('{service}', '{amount}', '{link}', '{date1}')")
-    con.commit()
+    renewal_date = request.form.get("date")
+    service = Service(service, amount, link, renewal_date)
+    service.insert_service()
     return redirect("/")
 
 

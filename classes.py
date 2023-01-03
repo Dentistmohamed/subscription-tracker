@@ -38,7 +38,7 @@ class Dates:
         this_month  = str(self.month_number()).zfill(2)
 
         # search in db for subscriptions ends this month
-        cursor.execute(f"SELECT service, amount, link, REPLACE(date, '-', '/') FROM Services WHERE strftime('%m', date) = '{this_month}' ORDER BY date")
+        cursor.execute(f"SELECT service, amount, link, REPLACE(date, '-', '/'), id FROM Services WHERE strftime('%m', date) = '{this_month}' ORDER BY date")
         results = cursor.fetchall()
         if len(results) < 1:
             raise IndexError("No subscriptions were found")
@@ -68,3 +68,23 @@ class Dates:
             total_amount = [('0', )]
         return total_amount
 
+class Service(Dates):
+    def __init__(self, name=None, amount=None, link=None, date=None):
+        super().__init__()
+        self.name = name
+        self.amount = amount
+        self.link = link
+        self.date = date
+    
+    def insert_service(self):
+        con = sqlite3.connect("database.db")
+        cursor = con.cursor()
+        cursor.execute(f"INSERT INTO Services (Service, amount, link, date) VALUES ('{self.name}', {self.amount}, '{self.link}', '{self.date}')")
+        con.commit()
+    
+    @property
+    def name(self):
+        return self._name
+    @name.setter
+    def name(self, val):
+        self._name = val.replace("'", "''")
