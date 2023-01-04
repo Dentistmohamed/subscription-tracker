@@ -45,21 +45,11 @@ def add():
 
 @app.route("/edit", methods=["POST"])
 def edit():
-    con = sqlite3.connect("database.db")
-    cursor = con.cursor()
-    today = date.today()
-    service = request.form.get("service")
-    service = service.replace("'", "''")
+    service_name = request.form.get("service")
     oldservice = request.form.get("oldservice")
     amount = request.form.get("amount")
     link = request.form.get("link")
-    link = link.replace("'", "''")
-    date1 = request.form.get("date")
-    if not date1:
-        date1 = today
-    if 'edit' in request.form:
-        cursor.execute(f"update services set service = '{service}', amount = '{amount}', link = '{link}', date = '{date1}' where service = '{oldservice}'")
-    elif 'delete' in request.form:
-        cursor.execute(f"delete from services where service = '{oldservice}'")
-    con.commit()
+    date0 = request.form.get("date")
+    service = Service(service_name, amount, link, date0, oldservice)
+    service.update_service()
     return redirect("/")

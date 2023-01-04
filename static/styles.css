@@ -141,3 +141,10 @@ table th, td {
     padding: 12px;
     font-weight: bold;
 }
+
+.service-info {
+    font-size: 25px;
+    background-color: transparent;
+    color: #ffffff;
+    border: none;
+}

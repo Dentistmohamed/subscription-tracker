@@ -69,13 +69,17 @@ class Dates:
         return total_amount
 
 class Service(Dates):
-    def __init__(self, name=None, amount=None, link=None, date=None):
+    def __init__(self, name=None, amount=None, link=None, date=None, service_id=None):
         super().__init__()
         self.name = name
         self.amount = amount
         self.link = link
         self.date = date
+        self.service_id = service_id
     
+    def __str__(self):
+        return f"{self.service_id}"
+
     def insert_service(self):
         con = sqlite3.connect("database.db")
         cursor = con.cursor()
@@ -88,3 +92,11 @@ class Service(Dates):
     @name.setter
     def name(self, val):
         self._name = val.replace("'", "''")
+    
+    def update_service(self):
+        con = sqlite3.connect("database.db")
+        cursor = con.cursor()
+        print((f"UPDATE Services SET service = '{self.name}', amount = {self.amount}, link = '{self.link}', date = '{self.date}' WHERE id = {self.service_id}"))
+        
+        cursor.execute(f"UPDATE Services SET service = '{self.name}', amount = {self.amount}, link = '{self.link}', date = '{self.date}' WHERE id = {self.service_id}")
+        con.commit()
