@@ -95,8 +95,6 @@ class Service(Dates):
     
     def update_service(self):
         con = sqlite3.connect("database.db")
-        cursor = con.cursor()
-        print((f"UPDATE Services SET service = '{self.name}', amount = {self.amount}, link = '{self.link}', date = '{self.date}' WHERE id = {self.service_id}"))
-        
+        cursor = con.cursor()        
         cursor.execute(f"UPDATE Services SET service = '{self.name}', amount = {self.amount}, link = '{self.link}', date = '{self.date}' WHERE id = {self.service_id}")
         con.commit()
