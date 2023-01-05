@@ -19,6 +19,7 @@ today = date.today()
 
 @app.route("/", methods=["GET"])
 def main():
+    Database()
     dates = Dates()
     today = dates.get_day()
     month = dates.get_month()

@@ -3,6 +3,20 @@ from datetime import date, datetime
 import sqlite3
 import calendar
 
+class Database:
+    def __init__(self):
+        con = sqlite3.connect("database.db")
+        cursor = con.cursor()
+        cursor.execute(f"""CREATE TABLE IF NOT EXISTS Services(
+            id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            service TEXT NOT NULL,
+            amount REAL,
+            link TEXT,
+            date TEXT
+        );""")
+        con.commit()
+
+
 class Dates:
     # init class with today date
     def __init__(self):
@@ -85,9 +99,9 @@ class Dates:
         con = sqlite3.connect("database.db")
         cursor = con.cursor()
         cursor.execute(f"SELECT SUM(amount) FROM Services WHERE strftime('%m', date) = '{self.add_leading_zero(self.month_number())}'")
-        total_amount = cursor.fetchall()
-        if not total_amount[0][0]:
-            total_amount = [('0', )]
+        total_amount = cursor.fetchone()
+        if not total_amount[0]:
+            total_amount = ('0', )
         return total_amount
 
     def total_later_months_subscriptions(self):
@@ -95,7 +109,10 @@ class Dates:
         con = sqlite3.connect("database.db")
         cursor = con.cursor()
         cursor.execute(f"SELECT SUM(amount) FROM Services WHERE strftime('%Y-%m-%d', date) BETWEEN '{from_date}' AND '{to_date}'")
-        return cursor.fetchone()
+        total_amount = cursor.fetchone()
+        if not total_amount[0]:
+            total_amount = ('0', )
+        return total_amount
 
 
 class Service(Dates):
