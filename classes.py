@@ -98,3 +98,8 @@ class Service(Dates):
         cursor = con.cursor()        
         cursor.execute(f"UPDATE Services SET service = '{self.name}', amount = {self.amount}, link = '{self.link}', date = '{self.date}' WHERE id = {self.service_id}")
         con.commit()
+    def delete_service(self):
+        con = sqlite3.connect("database.db")
+        cursor = con.cursor()
+        cursor.execute(f"DELETE FROM Services WHERE id = {self.service_id}")
+        con.commit()

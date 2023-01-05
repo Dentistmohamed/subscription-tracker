@@ -51,5 +51,8 @@ def edit():
     link = request.form.get("link")
     date0 = request.form.get("date")
     service = Service(service_name, amount, link, date0, oldservice)
-    service.update_service()
+    if 'delete' in request.form:
+        service.delete_service()
+    else:
+        service.update_service()
     return redirect("/")
