@@ -28,6 +28,11 @@ class Dates:
     def get_year(self):
         year = str(self.today).split("-")[0]
         return year[2:]
+    
+    def get_later_dates(self):
+        from_date = f"20{self.get_year()}-{str(int(self.month_number())+1).zfill(2)}-01"
+        to_date = f"20{self.get_year()}-12-31"
+        return from_date, to_date
 
     # search for all subscriptions
     def show_subscriptions(self):
@@ -44,12 +49,11 @@ class Dates:
             raise IndexError("No subscriptions were found")
         return results
 
-    def show_upcoming_subscriptions(self):
-        from_date = f"{self.get_year()}-{int(self.month_number())+1}-01"
-        to_date = f"{self.get_year()}-12-31"
+    def show_later_subscriptions(self):
+        from_date, to_date = self.get_later_dates()
         con = sqlite3.connect("database.db")
         cursor = con.cursor()
-        cursor.execute(f"SELECT service, amount, link, REPLACE(date, '-', '/'), id FROM Services WHERE strftime('%Y-%m-%d', date) BETWEEN '2023-02-01' AND '2023-12-31' ORDER BY date")
+        cursor.execute(f"SELECT service, amount, link, REPLACE(date, '-', '/'), id FROM Services WHERE strftime('%Y-%m-%d', date) BETWEEN '{from_date}' AND '{to_date}' ORDER BY date")
         return cursor.fetchall()
 
     def show_table(self):
@@ -75,6 +79,14 @@ class Dates:
         if not total_amount[0][0]:
             total_amount = [('0', )]
         return total_amount
+        
+    def total_later_months_subscriptions(self):
+        from_date, to_date = self.get_later_dates()
+        con = sqlite3.connect("database.db")
+        cursor = con.cursor()
+        cursor.execute(f"SELECT SUM(amount) FROM Services WHERE strftime('%Y-%m-%d', date) BETWEEN '{from_date}' AND '{to_date}'")
+        return cursor.fetchone()
+
 
 class Service(Dates):
     def __init__(self, name=None, amount=None, link=None, date=None, service_id=None):

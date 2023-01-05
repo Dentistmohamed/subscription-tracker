@@ -45,7 +45,7 @@
       <div class="upcoming-services">
       <hr>
 
-        <h1>Later months <span>{{year}}</span></h1>
+        <h1 class="later-h1">Later months <span>{{year}}</span></h1>
         <table>
           <thead>
             <tr>
@@ -63,12 +63,13 @@
               <td>E£ {{i[1]}}</td>
               <td>{{i[5]}} Days</td>
               <td>{{i[3]}}</td>
-              <td><a href="{{i[2]}}">{{i[0]}}</a></td>
+              <td><a href="http://{{i[2]}}">{{i[0]}}</a></td>
               {% endif %}
             </tr>
             {% endfor %}
           </tbody>
         </table>
+        <h1 class="total">E£ {{total_later}}</h1>
       </div>
     </div>
     <div class="add-service-model" id="add-service-model">

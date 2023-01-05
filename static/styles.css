@@ -153,7 +153,7 @@ table th, td {
     margin-top: 5%;
 }
 
-.upcoming-services h1 {
+.upcoming-services .later-h1 {
     font-size: 50px;
     color: #FF715B;
     

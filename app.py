@@ -27,13 +27,10 @@ def main():
         show_table = dates.show_table()
     except IndexError:
         show_table = [(None, )]
-    try:
-        upcoming_subscriptions = dates.show_upcoming_subscriptions()
-    except:
-        upcoming_subscriptions = [(None, )]
+    upcoming_subscriptions = dates.show_later_subscriptions()
     total_amount = dates.total_subscriptions_values()[0][0]
-    
-    return render_template("index.html", services=show_table,  total=total_amount, date=today, month=month, year=year, upcoming=upcoming_subscriptions)
+    total_later_dates = dates.total_later_months_subscriptions()[0]
+    return render_template("index.html", services=show_table,  total=total_amount, date=today, month=month, year=year, upcoming=upcoming_subscriptions, total_later = total_later_dates)
 
 
 @app.route("/add", methods=["POST"])
