@@ -61,7 +61,7 @@ class Dates:
         subscriptions_list = []
         for service in found_subscriptions:
             renewal_date = datetime.strptime(service[3], "%Y/%m/%d").date()
-            remaining_days = abs((renewal_date - self.today).days)
+            remaining_days = ((renewal_date - self.today).days)
             new_column = service + (remaining_days,)
             subscriptions_list.append(new_column)
         return subscriptions_list
@@ -74,7 +74,6 @@ class Dates:
             remaining_days = abs((renewal_date - self.today).days)
             new_column = service + (remaining_days,)
             subscriptions_list.append(new_column)
-        print(subscriptions_list)
         return subscriptions_list
 
     @staticmethod
