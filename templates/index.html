@@ -31,33 +31,20 @@
         <tbody>
           <tr>
             {% for i in services %} {% if i[0] %}
-            <td>
-              <button
-                onclick="show_edit()"
-                id="service"
-                class="service-info"
-                value="{{i[4]}}"
-                data-value1="{{i[1]}}"
-                ,
-                data-value2="{{i[4]}}"
-                data-value3="{{i[3]}}"
-                data-value4="{{i[2]}}"
-              >
-                {{i[0]}}
-              </button>
-            </td>
+            <td><button onclick="show_edit()" id="service" class="service-info" value="{{i[4]}}" data-value1="{{i[1]}}", data-value2="{{i[4]}}" data-value3="{{i[3]}}" data-value4="{{i[2]}}">{{i[0]}}</button></td>
             <td>E£ {{i[1]}}</td>
             <td>{{i[5]}} Days</td>
             <td>{{i[3]}}</td>
-            <td><a href="http://{{i[2]}}">{{i[0]}}</a></td>
+            <td><a href="{{i[2]}}">{{i[0]}}</a></td>
             {% endif %}
           </tr>
           {% endfor %}
         </tbody>
       </table>
       <h1 class="total">E£ {{total}}</h1>
-      <br>
       <div class="upcoming-services">
+      <hr>
+
         <h1>Later months <span>{{year}}</span></h1>
         <table>
           <thead>
@@ -71,26 +58,12 @@
           </thead>
           <tbody>
             <tr>
-              {% for i in services %} {% if i[0] %}
-              <td>
-                <button
-                  onclick="show_edit()"
-                  id="service"
-                  class="service-info"
-                  value="{{i[4]}}"
-                  data-value1="{{i[1]}}"
-                  ,
-                  data-value2="{{i[4]}}"
-                  data-value3="{{i[3]}}"
-                  data-value4="{{i[2]}}"
-                >
-                  {{i[0]}}
-                </button>
-              </td>
+              {% for i in upcoming %} {% if i[0] %}
+              <td><button onclick="show_edit()" id="service" class="service-info" value="{{i[4]}}" data-value1="{{i[1]}}", data-value2="{{i[4]}}" data-value3="{{i[3]}}" data-value4="{{i[2]}}">{{i[0]}}</button></td>
               <td>E£ {{i[1]}}</td>
               <td>{{i[5]}} Days</td>
               <td>{{i[3]}}</td>
-              <td><a href="http://{{i[2]}}">{{i[0]}}</a></td>
+              <td><a href="{{i[2]}}">{{i[0]}}</a></td>
               {% endif %}
             </tr>
             {% endfor %}

@@ -43,7 +43,15 @@ class Dates:
         if len(results) < 1:
             raise IndexError("No subscriptions were found")
         return results
-    
+
+    def show_upcoming_subscriptions(self):
+        from_date = f"{self.get_year()}-{int(self.month_number())+1}-01"
+        to_date = f"{self.get_year()}-12-31"
+        con = sqlite3.connect("database.db")
+        cursor = con.cursor()
+        cursor.execute(f"SELECT service, amount, link, REPLACE(date, '-', '/'), id FROM Services WHERE strftime('%Y-%m-%d', date) BETWEEN '2023-02-01' AND '2023-12-31' ORDER BY date")
+        return cursor.fetchall()
+
     def show_table(self):
         found_subscriptions = self.show_subscriptions()
         subscriptions_list = []
